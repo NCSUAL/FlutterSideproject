@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:side_project/homemain/HomeMain.dart';
+import 'package:side_project/home/HomeMain.dart';
 import 'package:side_project/likeable/LikeAbleMain.dart';
 import 'package:side_project/message/MessageMain.dart';
 import 'package:side_project/profile/ProfileMain.dart';
 import 'package:side_project/reponsive_layout/Responsive.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Navigation_Controller extends StatefulWidget {
+  const Navigation_Controller({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Navigation_Controller> createState() => _Navigation_ControllerState();
 }
 
-class _HomeState extends State<Home> {
+class _Navigation_ControllerState extends State<Navigation_Controller> {
   int _current = 0;
-  final double _fontsize = 16;
+  final double _fontsize = 14;
   @override
   Widget build(BuildContext context) {
     const List<Widget> screen = <Widget>[
@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
               width: double.infinity,
-              height: constraints.maxHeight*0.11,
+              height: constraints.maxHeight*0.08,
               child: Align(
                 alignment: Alignment.topCenter,
                 child: BottomNavigationBar(

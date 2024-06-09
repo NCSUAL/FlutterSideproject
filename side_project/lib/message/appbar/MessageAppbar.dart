@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/reponsive_layout/Responsive.dart';
 class MessageAppbar extends StatelessWidget {
-  const MessageAppbar({super.key});
+  final String? image;
+  final String text;
+  const MessageAppbar({super.key,required this.text,this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,13 @@ class MessageAppbar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-           Text("나에게 온 메세지",style: TextStyle(fontFamily: "Pretendard",fontWeight: FontWeight.w800,fontSize: 19.5.sp),),
+           Text(this.text,style: TextStyle(fontFamily: "Pretendard",fontWeight: FontWeight.w800,fontSize: 19.5.sp),),
             SizedBox(width: 1.w,),
-            Container(width: 3.4.h,child: Image_Res("message_2", 1))
+
+            if(this.image!= null)...[
+              Container(width: 3.4.h,child: Image_Res(this.image??"", 1))
+            ]
+
           ],
         ),
       ),
