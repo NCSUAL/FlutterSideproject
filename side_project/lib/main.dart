@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'controller/Controller_Navigation.dart';
+import 'home.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 void main() {
   runApp(
@@ -7,7 +7,7 @@ void main() {
       ResponsiveSizer(
         builder: (context, orientation, screenType) {
           return MaterialApp(
-              home: Navigation_Controller(),
+              home: Home(),
             );
         }
       ));

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:side_project/message/appbar/MessageAppbar.dart';
+import 'package:side_project/view/likeable/tabview/Received_Like_Able.dart';
+import 'package:side_project/view/message/appbar/MessageAppbar.dart';
 import './tabbar/CustomTab.dart';
 
 class LikeAbleMain extends StatefulWidget {
@@ -11,13 +12,15 @@ class LikeAbleMain extends StatefulWidget {
   State<LikeAbleMain> createState() => _LikeAbleMainState();
 }
 
-class _LikeAbleMainState extends State<LikeAbleMain> with TickerProviderStateMixin {
+class _LikeAbleMainState extends State<LikeAbleMain> with TickerProviderStateMixin{
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this,
+        animationDuration: Duration.zero //애니메이션 제거
+    );
     _tabController.addListener(() {
       setState(() {});
     });
@@ -37,7 +40,7 @@ class _LikeAbleMainState extends State<LikeAbleMain> with TickerProviderStateMix
           preferredSize: Size.fromHeight(6.5.h),
           child: MessageAppbar(text: "나의 호감 현황"),
         ),
-        backgroundColor: Color(0xffF2F3F4),
+
         body: Column(
           children: [
             Container(
@@ -55,23 +58,27 @@ class _LikeAbleMainState extends State<LikeAbleMain> with TickerProviderStateMix
                   CustomTab(
                     label: '받은 호감',
                     selected: _tabController.index == 0,
+                    width: 21.9,
                   ),
                   CustomTab(
                     label: '보낸 호감',
                     selected: _tabController.index == 1,
+                    width: 21.9,
                   ),
                   CustomTab(
                     label: '스쳐간 반쪽',
                     selected: _tabController.index == 2,
+                    width: 24,
                   ),
                 ],
               ),
             ),
             Expanded(
               child: TabBarView(
+                physics: NeverScrollableScrollPhysics(), //애니메이션 제거
                 controller: _tabController,
                 children: [
-                  Center(child: Text("받은 호감 내용")),
+                  Recieved_Like_Able(),
                   Center(child: Text("보낸 호감 내용")),
                   Center(child: Text("스쳐간 반쪽 내용")),
                 ],

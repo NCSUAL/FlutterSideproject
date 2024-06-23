@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:side_project/model/Message_Model.dart';
 class Received_Message extends StatelessWidget {
-  const Received_Message({super.key});
+  final Message_Model data;
+  const Received_Message({super.key,required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,13 @@ class Received_Message extends StatelessWidget {
 
         return Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(9),
+            borderRadius: BorderRadius.circular(11),
           ),
           elevation: 2,
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white, // Container 배경 색상 설정
-              borderRadius: BorderRadius.circular(9),
+              borderRadius: BorderRadius.circular(11),
             ),
             width: containerWidth,
             height: containerHeight,
@@ -46,7 +48,7 @@ class Received_Message extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              'bright98님',
+                              '${data.receiver_name}님',
                               style: TextStyle(
                                 color: Color(0xFF171B1C),
                                 fontSize: containerWidth * 0.04,
@@ -57,7 +59,7 @@ class Received_Message extends StatelessWidget {
                           ),
                           SizedBox(width: containerWidth * 0.01),
                           Text(
-                            '2시간 전',
+                            '1000시간 전',
                             style: TextStyle(
                               color: Color(0xFF999FA4),
                               fontSize: containerWidth * 0.035,
@@ -70,12 +72,13 @@ class Received_Message extends StatelessWidget {
                       SizedBox(height: containerHeight * 0.21),
                       Flexible(
                         child: Text(
-                          '대화하고 싶어서 연락드려요~ 좋으신분 같...',
+                          '${data.content}',
                           style: TextStyle(
                             color: Color(0xFF5A6166),
                             fontSize: containerWidth * 0.036,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w400,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),
