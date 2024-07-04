@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/view/likeable/tabview/Received_Like_Able.dart';
+import 'package:side_project/view/likeable/tabview/Sent_Like_Able.dart';
 import 'package:side_project/view/message/appbar/MessageAppbar.dart';
 import './tabbar/CustomTab.dart';
 
@@ -12,15 +13,16 @@ class LikeAbleMain extends StatefulWidget {
   State<LikeAbleMain> createState() => _LikeAbleMainState();
 }
 
-class _LikeAbleMainState extends State<LikeAbleMain> with TickerProviderStateMixin{
+class _LikeAbleMainState extends State<LikeAbleMain>
+    with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this,
-        animationDuration: Duration.zero //애니메이션 제거
-    );
+    _tabController = TabController(
+        length: 3, vsync: this, animationDuration: Duration.zero //애니메이션 제거
+        );
     _tabController.addListener(() {
       setState(() {});
     });
@@ -40,18 +42,17 @@ class _LikeAbleMainState extends State<LikeAbleMain> with TickerProviderStateMix
           preferredSize: Size.fromHeight(6.5.h),
           child: MessageAppbar(text: "나의 호감 현황"),
         ),
-
         body: Column(
           children: [
             Container(
               color: Colors.white,
               child: TabBar(
-                padding: EdgeInsets.only(left: 5.3.w,top: 0.5.h,bottom: 2.5.h),
+                padding:
+                    EdgeInsets.only(left: 5.65.w, top: 0.5.h, bottom: 2.5.h),
                 controller: _tabController,
-                indicator: BoxDecoration(
-
-                ), // indicator 제거
-                labelPadding: EdgeInsets.symmetric(horizontal: 1.w), // 탭 사이 간격 제거
+                indicator: BoxDecoration(), // indicator 제거
+                labelPadding:
+                    EdgeInsets.symmetric(horizontal: 1.w), // 탭 사이 간격 제거
                 isScrollable: true,
                 tabAlignment: TabAlignment.start,
                 tabs: [
@@ -79,7 +80,7 @@ class _LikeAbleMainState extends State<LikeAbleMain> with TickerProviderStateMix
                 controller: _tabController,
                 children: [
                   Recieved_Like_Able(),
-                  Center(child: Text("보낸 호감 내용")),
+                  Sent_Like_Able(),
                   Center(child: Text("스쳐간 반쪽 내용")),
                 ],
               ),
