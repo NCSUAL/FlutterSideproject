@@ -1,5 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:side_project/bloc/OtherProfilesBloc.dart';
+import 'package:side_project/reponsive_layout/Responsive_Function.dart';
+import 'package:side_project/view/home/ProfileAppbar/ProfileAppbar.dart';
+import 'package:side_project/view/home/designcomponent/DesignComponent1.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsProfile extends StatelessWidget {
   const DetailsProfile({super.key});
@@ -7,165 +14,193 @@ class DetailsProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
+    final state = context.watch<OtherProfilesBloc>().state;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xffF2F3F4),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(5.h),
+          child: Container(
+            color: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 7.6.w, vertical: 1.1.h),
+              child: ProfileAppbar(),
+            ),
+          ),
+        ),
         body: Stack(
           children: [
-            SingleChildScrollView(
-              controller: scrollController,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        height: 20.h,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              'https://img.freepik.com/free-vector/vector-damask-seamless-pattern-background-classical-luxury-old-fashioned-damask-ornament-royal-victorian-seamless-texture-wallpapers-textile-wrapping-exquisite-floral-baroque-template_1217-738.jpg?t=st=1719395015~exp=1719398615~hmac=6cb577d0b8b05885cafb1323e0efd98ee7d3edcd2ba584287ab5f1f982be89b6&w=740',
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 10,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 1.h, horizontal: 3.w),
-                          decoration: BoxDecoration(
-                            color: Colors.black54,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            '서로 반지를 보냈어요',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15.sp,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 2.h),
-                  Text(
-                    '마카롱님의 프로필',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 19.4.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  SizedBox(height: 2.h),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5.w),
-                    child: Column(
+            ScrollConfiguration(
+              behavior: const ScrollBehavior()
+                  .copyWith(overscroll: false), // 담김 효과 제거 overscroll
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Stack(
+                      alignment: Alignment.bottomCenter,
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 1.h, horizontal: 3.w),
+                          height: 49.6.h,
+                          width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '나와의 관계',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16.sp,
-                                ),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                state.data!.images[0].image,
                               ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.orange,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        //서로 호감일시 UI
+                        /**
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 1.8.h),
+                          child: Container(
+                            width: 46.w,
+                            height: 3.8.h,
+                            decoration: ShapeDecoration(
+                                color: Colors.black
+                                    .withOpacity(0.6000000238418579),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                )),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 3.3.w,
+                                  child: Image_Res('ring', 1),
                                 ),
-                                child: Text(
-                                  '긴장',
+                                SizedBox(
+                                  width: 1.3.w,
+                                ),
+                                Text(
+                                  '서로 반지를 보냈어요',
                                   style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w500,
                                     color: Colors.white,
                                     fontSize: 16.sp,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 2.h),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 1.h, horizontal: 3.w),
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              '연애 스타일 보러가기 >',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                              ),
+                              ],
                             ),
                           ),
                         ),
+                        */
                       ],
                     ),
-                  ),
-                  SizedBox(height: 2.h),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5.w),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 1.h, horizontal: 3.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                    SizedBox(height: 3.8.h),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 6.w),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 4.w),
+                            width: double.infinity,
+                            height: 6.7.h,
+                            decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      '나와의 관계',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17.7.sp,
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w600,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 0.3.w,
+                                    ),
+                                    Container(
+                                      width: 5.7.w,
+                                      child: Image_Res('point', 1),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  width: 16.w,
+                                  height: 3.5.h,
+                                  decoration: ShapeDecoration(
+                                    color: Color(0xFFFFB700),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(18.33),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '준비중',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17.78.sp,
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w600,
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '프로필',
+                          SizedBox(height: 2.h),
+                          Container(
+                            width: double.infinity,
+                            height: 7.h,
+                            decoration: ShapeDecoration(
+                              color: Color(0xFF74D495),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '연애 스타일 보러가기 >',
                                 style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16.sp,
+                                  color: Colors.white,
+                                  fontSize: 17.5.sp,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
                                 ),
                               ),
-                              Icon(Icons.keyboard_arrow_up,
-                                  color: Colors.black),
-                            ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 1.h),
-                      ],
+                          SizedBox(height: 1.8.h),
+                          DesignComponent1(),
+                          SizedBox(
+                            height: 50.h,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: EdgeInsets.all(2.h),
+                padding: EdgeInsets.only(left: 6.w, right: 6.w, bottom: 1.7.h),
                 child: Container(
+                  height: 8.4.h,
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(36),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black12,
@@ -173,70 +208,117 @@ class DetailsProfile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.favorite,
-                              color: Colors.green, size: 24.sp),
-                          SizedBox(height: 1.h),
-                          Text(
-                            '하트',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Colors.black,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 14.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              child: Image_Res('heart_ch', 1),
+                              width: 8.w,
                             ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.circle, color: Colors.grey, size: 24.sp),
-                          SizedBox(height: 1.h),
-                          Text(
-                            '반지',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Colors.black,
+                            SizedBox(
+                              height: 0.3.h,
                             ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.message, color: Colors.green, size: 24.sp),
-                          SizedBox(height: 1.h),
-                          Text(
-                            '메세지',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Colors.black,
+                            Text(
+                              '하트',
+                              style: TextStyle(
+                                color: Color(0xFF00C57D),
+                                fontSize: 14.5.sp,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              child: Image_Res('ring_change', 1),
+                              width: 8.w,
+                            ),
+                            SizedBox(
+                              height: 0.3.h,
+                            ),
+                            Text(
+                              '반지',
+                              style: TextStyle(
+                                color: Color(0xFF00C57D),
+                                fontSize: 14.5.sp,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              child: Image_Res('chat_change', 1),
+                              width: 8.w,
+                            ),
+                            SizedBox(
+                              height: 0.3.h,
+                            ),
+                            Text(
+                              '메세지',
+                              style: TextStyle(
+                                color: Color(0xFF00C57D),
+                                fontSize: 14.5.sp,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-            Positioned(
-              bottom: 10.h,
-              right: 2.h,
-              child: FloatingActionButton(
-                onPressed: () {
-                  scrollController.animateTo(
-                    0,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );
-                },
-                child: Icon(Icons.keyboard_arrow_up),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: EdgeInsets.only(left: 6.w, right: 6.w, bottom: 12.h),
+                child: Container(
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: OvalBorder(),
+                      shadows: [
+                        BoxShadow(
+                          color: Color(0x26000000),
+                          blurRadius: 10,
+                          offset: Offset(0, 2),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        //위로 가기
+                        scrollController.animateTo(
+                          0,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(12.sp),
+                        child: SizedBox(
+                          width: 6.4.w,
+                          child: Image_Res('arrow', 1),
+                        ),
+                      ),
+                    )),
               ),
             ),
           ],

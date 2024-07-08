@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:side_project/bloc/DailyFourIntroduceBloc.dart';
 import 'package:side_project/bloc/MyProfilesBloc.dart';
+import 'package:side_project/bloc/OtherProfilesBloc.dart';
 import 'package:side_project/bloc/ReceivedMessageBloc.dart';
 import 'package:side_project/bloc/SentMessageBloc.dart';
 import 'package:side_project/bloc/TimeDailyFourIntroduceBloc.dart';
@@ -14,8 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(ResponsiveSizer(builder: (context, orientation, screenType) {
-    //서비스
-    /**
+    //서비스'
     return MultiBlocProvider(
       providers: [
         BlocProvider(lazy: false, create: (context) => MyProfilesBloc()),
@@ -25,6 +25,7 @@ void main() {
             lazy: false, create: (context) => TimeDailyFourIntroduceBloc()),
         BlocProvider(lazy: false, create: (context) => ReceivedMessageBloc()),
         BlocProvider(lazy: false, create: (context) => SentMessageBloc()),
+        BlocProvider(create: (context) => OtherProfilesBloc()),
       ],
       child: getx.GetMaterialApp(
         home: Home(),
@@ -41,11 +42,12 @@ void main() {
       ),
     );
 
-        */
-    //디자인
+    /**
     return getx.GetMaterialApp(
       home: Design(),
     );
+    */
+
     //점검
   }));
 }

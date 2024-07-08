@@ -9,6 +9,12 @@ class Received_Message extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //텍스트 첫줄만 반환
+    String getFirstLine(String? text) {
+      List<String> _list = (text ?? '').split('\n');
+      return _list[0];
+    }
+
     return LayoutBuilder(
       builder: (context, constraints) {
         double containerWidth = 100.w;
@@ -76,7 +82,7 @@ class Received_Message extends StatelessWidget {
                     SizedBox(height: containerHeight * 0.21),
                     Flexible(
                       child: Text(
-                        '${data.content}',
+                        getFirstLine(data.content),
                         style: TextStyle(
                           color: Color(0xFF5A6166),
                           fontSize: containerWidth * 0.036,

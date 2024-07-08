@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:side_project/api/Request_Api.dart';
 import 'package:side_project/bloc/DailyFourIntroduceBloc.dart';
+import 'package:side_project/bloc/OtherProfilesBloc.dart';
 import 'package:side_project/bloc/ReceivedMessageBloc.dart';
 import 'package:dio/dio.dart';
 import 'package:side_project/dto/MessageUpdateDto.dart';
@@ -14,6 +15,7 @@ class ApiController<T> extends Request_Api {
   static const String _todayProfiles = 'profiles/today/';
   static const String _messageRefuse = 'message/';
   static const String _messageSent = 'message/sent/';
+  static const String _profile = 'profiles/';
   static const String _myprofile = 'profiles/my/';
   MessageUpdateDto? refuseDto;
   int? id;
@@ -31,9 +33,9 @@ class ApiController<T> extends Request_Api {
         _response = await get_Request(_myprofile);
         return _response;
 
-      case InquiryProfileEvent:
+      case LoadOtherProfilesEvent:
         //프로필 조회
-        _response = await get_Request_Include_param(_myprofile, id!);
+        _response = await get_Request_Include_param(_profile, id!);
         return _response;
 
       case SentMessageLoadEvent:

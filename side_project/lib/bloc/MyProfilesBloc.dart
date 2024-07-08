@@ -14,26 +14,13 @@ class MyProfilesBloc extends Bloc<MyProfileEvent, MyProfileState> {
 
         emit(LoadedMyProfileState(data: ProfileModel.fromJson(data.data)));
       } catch (e) {
+        print(e);
         emit(ErrorMyProfileState());
       }
     });
 
     //블럭 생성시 이벤트 실행
     add(LoadMyProfileEvent());
-
-    //프로필 조회
-    on<InquiryProfileEvent>((event, emit) async {
-      apiController = new ApiController<InquiryProfileEvent>();
-      emit(LoadingMyProfileState());
-      try {
-        final data = await apiController.apiCategorize();
-      }
-      catch (e) {
-        print(e);
-        emit(ErrorMyProfileState());
-      }
-    });
-
   }
 }
 
@@ -46,16 +33,6 @@ class LoadMyProfileEvent extends MyProfileEvent {
   List<Object?> get props => [];
 }
 
-//프로빌 조회 이벤트
-class InquiryProfileEvent extends MyProfileEvent {
-  final int id;
-  InquiryProfileEvent({required this.id});
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [];
-}
-
 //state
 abstract class MyProfileState extends Equatable {
   final ProfileModel? data;
@@ -63,7 +40,7 @@ abstract class MyProfileState extends Equatable {
 
   @override
   // TODO: implement props
-  List<Object?> get props => [];
+  List<Object?> get props => [data];
 }
 
 class InitMtProfileState extends MyProfileState {

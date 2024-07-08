@@ -31,8 +31,9 @@ class DesignComponent1 extends StatelessWidget {
             height: 3.h,
           ),
           Container(
-            height: 30.h,
+            height: 23.h,
             child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 4,
               itemBuilder: (context, index) {
                 return ProfileRow(index: index);
@@ -57,6 +58,7 @@ class ProfileRow extends StatelessWidget {
         Container(
           height: 3.5.h,
           child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Row(
@@ -72,27 +74,31 @@ class ProfileRow extends StatelessWidget {
                     _list[index + (this.index * 2)],
                     style: TextStyle(
                       color: Color(0xFF171B1C),
-                      fontSize: 16.sp,
+                      fontSize: 17.sp,
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w500,
                       height: 0,
                     ),
                   ),
                   SizedBox(
-                    width: 3.7.w,
+                    width: 3.w,
                   ),
-                  Text(
-                    'test',
-                    style: TextStyle(
-                      color: Color(0xFF171B1C),
-                      fontSize: 16.sp,
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400,
-                      height: 0,
+                  Container(
+                    width: 20.w,
+                    child: Text(
+                      'ㅇㄴ미ㅏㄻㄴ이ㅏㄹ',
+                      style: TextStyle(
+                        color: Color(0xFF171B1C),
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: 16.sp,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        height: 0,
+                      ),
                     ),
                   ),
                   SizedBox(
-                    width: 16.w,
+                    width: 5.w,
                   ),
                 ],
               );
@@ -101,7 +107,7 @@ class ProfileRow extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 3.h,
+          height: 2.3.h,
         ),
       ],
     );
