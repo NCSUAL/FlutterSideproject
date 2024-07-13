@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/model/MessageModel.dart';
+import 'package:side_project/test/Image.dart';
 
 class Received_Message extends StatelessWidget {
   final MessageModel data;
@@ -42,8 +43,7 @@ class Received_Message extends StatelessWidget {
               CircleAvatar(
                 radius: containerHeight, // 반응형으로 조정
                 backgroundColor: Color(0xFF171B1C),
-                backgroundImage: NetworkImage(
-                    "https://img.freepik.com/free-vector/vector-damask-seamless-pattern-background-classical-luxury-old-fashioned-damask-ornament-royal-victorian-seamless-texture-wallpapers-textile-wrapping-exquisite-floral-baroque-template_1217-738.jpg?t=st=1719395015~exp=1719398615~hmac=6cb577d0b8b05885cafb1323e0efd98ee7d3edcd2ba584287ab5f1f982be89b6&w=740"),
+                backgroundImage: NetworkImage(ImageTest.image),
               ),
               SizedBox(width: containerWidth * 0.02),
               Expanded(

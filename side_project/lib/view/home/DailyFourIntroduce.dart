@@ -5,6 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/bloc/OtherProfilesBloc.dart';
 import 'package:side_project/bloc/TimeDailyFourIntroduceBloc.dart';
 import 'package:side_project/reponsive_layout/Responsive_Function.dart';
+import 'package:side_project/test/Image.dart';
 import 'package:side_project/view/loading/Loading.dart';
 import 'package:get/get.dart';
 
@@ -36,17 +37,17 @@ class DailyFourIntroduce extends StatelessWidget {
                   timeDailyFourIntroduceState.passTime[a]
                       ? GestureDetector(
                           onTap: () {
-                            Get.toNamed('/DetailsProfile');
                             context.read<OtherProfilesBloc>().add(
                                 LoadOtherProfilesEvent(id: state.datas[a].id));
+                            Get.toNamed('/DetailsProfile');
                           },
                           child: CustomGridItem(
-                            image: "",
+                            image: ImageTest.image,
                             text: state.datas[a].nickname!,
                           ),
                         )
                       : CustomGridItem(
-                          image: items[a]["image"]!,
+                          image: null,
                           text: items[a]["text"]!,
                         )
               ]);
@@ -59,10 +60,10 @@ class DailyFourIntroduce extends StatelessWidget {
 }
 
 class CustomGridItem extends StatelessWidget {
-  final String image;
+  final String? image;
   final String text;
 
-  CustomGridItem({required this.image, required this.text});
+  CustomGridItem({this.image, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +77,29 @@ class CustomGridItem extends StatelessWidget {
           ),
           width: double.infinity,
           height: 24.h,
-          child: Center(
-              child: SizedBox(width: 21.5.w, child: Image_Res('Mask', 1))),
+          child: this.image == null
+              ? Center(
+                  child: SizedBox(width: 21.5.w, child: Image_Res('Mask', 1)))
+              : Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 0.5,
+                        blurRadius: 5,
+                        offset: Offset(0, 3), // 그림자의 위치 조정
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      ImageTest.image,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
         ),
         SizedBox(
           height: 1.2.h,

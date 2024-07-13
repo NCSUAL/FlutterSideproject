@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:side_project/model/ProfileModel.dart';
 import 'package:side_project/reponsive_layout/Responsive_Function.dart';
 
 class DesignComponent1 extends StatelessWidget {
-  const DesignComponent1({super.key});
+  final ProfileModel data;
+  const DesignComponent1({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,10 @@ class DesignComponent1 extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 4,
               itemBuilder: (context, index) {
-                return ProfileRow(index: index);
+                return ProfileRow(
+                  index: index,
+                  data: data,
+                );
               },
             ),
           ),
@@ -48,7 +53,8 @@ class DesignComponent1 extends StatelessWidget {
 
 class ProfileRow extends StatelessWidget {
   final int index;
-  ProfileRow({required this.index});
+  final ProfileModel data;
+  ProfileRow({required this.index, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +92,7 @@ class ProfileRow extends StatelessWidget {
                   Container(
                     width: 20.w,
                     child: Text(
-                      'ㅇㄴ미ㅏㄻㄴ이ㅏㄹ',
+                      getTextForIndex(index + (this.index * 2)),
                       style: TextStyle(
                         color: Color(0xFF171B1C),
                         overflow: TextOverflow.ellipsis,
@@ -111,5 +117,26 @@ class ProfileRow extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String getTextForIndex(int combinedIndex) {
+    switch (combinedIndex) {
+      case 0:
+        return '준비중';
+      case 1:
+        return data.height.toString();
+      case 2:
+        return data.residence;
+      case 3:
+        return data.job;
+      case 4:
+        return data.is_smoke ? '흡연자' : '비흡연자';
+      case 5:
+        return data.drinking_frequency;
+      case 6:
+        return data.religion;
+      default:
+        return '준비중';
+    }
   }
 }

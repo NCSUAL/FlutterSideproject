@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/animation.dart';
 import 'package:side_project/dto/MessageUpdateDto.dart';
 import 'package:side_project/model/MessageModel.dart';
 import '../controller/ApiController.dart';
@@ -10,20 +11,21 @@ class ReceivedMessageBloc
   ReceivedMessageBloc() : super(InitMessageState()) {
     //데이터 로드
     on<ReceivedMessageLoadEvent>((event, emit) async {
+      // 현재상태 - 로딩
+      emit(LoadingReceivedMessageState());
+
       //제네릭 의존관계 주입
       apiController = new ApiController<ReceivedMessageLoadEvent>();
 
       try {
-        // 현재상태 - 로딩
-        emit(LoadingReceivedMessageState());
-
         // api/v1/message/  - get
         final datas = await apiController.apiCategorize();
-
         if (datas.data != null) {
+          final _mappingMessageModel = MappingMessageModel.fromJson(datas.data);
           emit(LoadedReceivedMessageState(
-            receive_message: MappingMessageModel.fromJson(datas.data).datas,
-          ));
+              receive_message: _mappingMessageModel.alldatas,
+              ring_receive: _mappingMessageModel.ringdatas,
+              heart_receive: _mappingMessageModel.heartdatas));
         } else {
           emit(ErrorMessageState());
         }
@@ -32,16 +34,18 @@ class ReceivedMessageBloc
       }
     });
 
-    //블럭생성시 이벤트 실행
-    add(ReceivedMessageLoadEvent());
-
     //메세지 거절
     on<ReceivedMessagedRefuseEvent>((event, emit) async {
+      //로딩 상태
+      emit(LoadingReceivedMessageState());
       //제네릭 의존관계 주입
       apiController = new ApiController<ReceivedMessagedRefuseEvent>(
           refuseDto: event._messageUpdateDto);
 
       await apiController.apiCategorize();
+
+      //받은 메세지 데이터 로드
+      add(ReceivedMessageLoadEvent());
     });
   }
 }
@@ -71,7 +75,12 @@ class ReceivedMessagedRefuseEvent extends ReceivedMessageEvent {
 abstract class ReceivedMessageState extends Equatable {
   //상태관리 대상
   final List<MessageModel> receive_message;
-  const ReceivedMessageState({required this.receive_message});
+  final List<MessageModel> heart_receive;
+  final List<MessageModel> ring_receive;
+  const ReceivedMessageState(
+      {required this.receive_message,
+      required this.heart_receive,
+      required this.ring_receive});
 
   //getter + private
   @override
@@ -80,7 +89,8 @@ abstract class ReceivedMessageState extends Equatable {
 
 class InitMessageState extends ReceivedMessageState {
   //init
-  InitMessageState() : super(receive_message: []);
+  InitMessageState()
+      : super(receive_message: [], heart_receive: [], ring_receive: []);
 
   @override
   // TODO: implement props
@@ -88,7 +98,8 @@ class InitMessageState extends ReceivedMessageState {
 }
 
 class LoadingReceivedMessageState extends ReceivedMessageState {
-  LoadingReceivedMessageState() : super(receive_message: []);
+  LoadingReceivedMessageState()
+      : super(receive_message: [], ring_receive: [], heart_receive: []);
 
   @override
   // TODO: implement props
@@ -96,7 +107,10 @@ class LoadingReceivedMessageState extends ReceivedMessageState {
 }
 
 class LoadedReceivedMessageState extends ReceivedMessageState {
-  const LoadedReceivedMessageState({required super.receive_message});
+  const LoadedReceivedMessageState(
+      {required super.receive_message,
+      required super.heart_receive,
+      required super.ring_receive});
 
   @override
   // TODO: implement props
@@ -104,7 +118,8 @@ class LoadedReceivedMessageState extends ReceivedMessageState {
 }
 
 class ErrorMessageState extends ReceivedMessageState {
-  ErrorMessageState() : super(receive_message: []);
+  ErrorMessageState()
+      : super(receive_message: [], heart_receive: [], ring_receive: []);
 
   @override
   // TODO: implement props

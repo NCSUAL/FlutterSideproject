@@ -5,7 +5,8 @@ import 'package:side_project/reponsive_layout/Responsive_Function.dart';
 import 'package:get/get.dart';
 
 class ProfileAppbar extends StatelessWidget {
-  const ProfileAppbar({super.key});
+  final String text;
+  const ProfileAppbar({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +26,10 @@ class ProfileAppbar extends StatelessWidget {
           ),
           Center(
             child: Text(
-              '마카롱님의 프로필',
+              '${text}의 프로필',
               style: TextStyle(
                 color: Color(0xFF2E363A),
-                fontSize: 17.1.sp,
+                fontSize: 17.3.sp,
                 fontFamily: 'Pretendard',
                 fontWeight: FontWeight.w500,
                 height: 0,

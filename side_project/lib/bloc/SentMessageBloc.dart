@@ -20,10 +20,12 @@ class SentMessageBloc extends Bloc<SentMessageEvent, SentMessageState> {
 
       try {
         final data = await apiController.apiCategorize();
-
         if (data != null) {
+          final _mappingMessageModel = MappingMessageModel.fromJson(data.data);
           emit(LoadedSentMessageState(
-              sent_message: MappingMessageModel.fromJson(data.data).datas));
+              sent_message: _mappingMessageModel.alldatas,
+              ring_receive: _mappingMessageModel.ringdatas,
+              heart_receive: _mappingMessageModel.heartdatas));
         } else {
           emit(ErrorMessageState());
         }
@@ -31,9 +33,6 @@ class SentMessageBloc extends Bloc<SentMessageEvent, SentMessageState> {
         emit(ErrorMessageState());
       }
     });
-
-    //블럭생성시 이벤트 실행
-    add(SentMessageLoadEvent());
   }
 }
 
@@ -50,7 +49,12 @@ class SentMessageLoadEvent extends SentMessageEvent {
 abstract class SentMessageState extends Equatable {
   //상태관리 대상
   final List<MessageModel> sent_message;
-  const SentMessageState({required this.sent_message});
+  final List<MessageModel> heart_receive;
+  final List<MessageModel> ring_receive;
+  const SentMessageState(
+      {required this.sent_message,
+      required this.heart_receive,
+      required this.ring_receive});
 
   @override
   // TODO: implement props
@@ -58,7 +62,8 @@ abstract class SentMessageState extends Equatable {
 }
 
 class InitSentMessageState extends SentMessageState {
-  InitSentMessageState() : super(sent_message: []);
+  InitSentMessageState()
+      : super(sent_message: [], heart_receive: [], ring_receive: []);
 
   @override
   // TODO: implement props
@@ -66,13 +71,18 @@ class InitSentMessageState extends SentMessageState {
 }
 
 class LoadingSentMessageState extends SentMessageState {
-  LoadingSentMessageState() : super(sent_message: []);
+  LoadingSentMessageState()
+      : super(sent_message: [], ring_receive: [], heart_receive: []);
 }
 
 class LoadedSentMessageState extends SentMessageState {
-  LoadedSentMessageState({required super.sent_message});
+  LoadedSentMessageState(
+      {required super.sent_message,
+      required super.heart_receive,
+      required super.ring_receive});
 }
 
 class ErrorMessageState extends SentMessageState {
-  ErrorMessageState() : super(sent_message: []);
+  ErrorMessageState()
+      : super(sent_message: [], heart_receive: [], ring_receive: []);
 }

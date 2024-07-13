@@ -57,6 +57,7 @@ class _HomeMainState extends State<HomeMain> {
                     ),
                     //이용 방법 버튼
 
+                    /**
                     Row(
                       children: [
                         //하트버튼
@@ -78,6 +79,7 @@ class _HomeMainState extends State<HomeMain> {
                         //설정 버튼
                       ],
                     ),
+                    */
                   ],
                 ),
               ),

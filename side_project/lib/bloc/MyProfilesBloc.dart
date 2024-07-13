@@ -12,15 +12,22 @@ class MyProfilesBloc extends Bloc<MyProfileEvent, MyProfileState> {
       try {
         final data = await apiController.apiCategorize();
 
-        emit(LoadedMyProfileState(data: ProfileModel.fromJson(data.data)));
+        //폰 등록 여부
+        apiController = new ApiController<RegistrationPhoneNumberEvent>();
+
+        final registrationPhoneNumber = await apiController.apiCategorize();
+        if (registrationPhoneNumber.statusCode != 200) {
+          emit(LoadedMyProfileState(
+              data: ProfileModel.fromJson(data.data), phone_number: false));
+        } else {
+          emit(LoadedMyProfileState(
+              data: ProfileModel.fromJson(data.data), phone_number: true));
+        }
       } catch (e) {
         print(e);
         emit(ErrorMyProfileState());
       }
     });
-
-    //블럭 생성시 이벤트 실행
-    add(LoadMyProfileEvent());
   }
 }
 
@@ -33,10 +40,18 @@ class LoadMyProfileEvent extends MyProfileEvent {
   List<Object?> get props => [];
 }
 
+//폰 등록 여부
+class RegistrationPhoneNumberEvent extends MyProfileEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
+
 //state
 abstract class MyProfileState extends Equatable {
   final ProfileModel? data;
-  const MyProfileState({required this.data});
+  final bool phone_number;
+  const MyProfileState({required this.data, required this.phone_number});
 
   @override
   // TODO: implement props
@@ -44,17 +59,17 @@ abstract class MyProfileState extends Equatable {
 }
 
 class InitMtProfileState extends MyProfileState {
-  InitMtProfileState() : super(data: null);
+  InitMtProfileState() : super(data: null, phone_number: false);
 }
 
 class LoadingMyProfileState extends MyProfileState {
-  LoadingMyProfileState() : super(data: null);
+  LoadingMyProfileState() : super(data: null, phone_number: false);
 }
 
 class LoadedMyProfileState extends MyProfileState {
-  LoadedMyProfileState({required super.data});
+  LoadedMyProfileState({required super.data, required super.phone_number});
 }
 
 class ErrorMyProfileState extends MyProfileState {
-  ErrorMyProfileState() : super(data: null);
+  ErrorMyProfileState() : super(data: null, phone_number: false);
 }

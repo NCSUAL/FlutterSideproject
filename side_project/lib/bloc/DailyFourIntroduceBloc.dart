@@ -22,10 +22,6 @@ class DailyFourIntroduceBloc
         }
       },
     );
-
-    //블럭 생성시 이벤트 호출
-    add(LoadDailyFourIntroduceEvent());
-
   }
 }
 
@@ -37,7 +33,6 @@ class LoadDailyFourIntroduceEvent extends DailyFourIntroduceEvent {
   // TODO: implement props
   List<Object?> get props => [];
 }
-
 
 //state
 abstract class DailyFourIntroduceState extends Equatable {

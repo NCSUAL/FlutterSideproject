@@ -17,6 +17,7 @@ class ApiController<T> extends Request_Api {
   static const String _messageSent = 'message/sent/';
   static const String _profile = 'profiles/';
   static const String _myprofile = 'profiles/my/';
+  static const String _registrationPhoneNumber = 'profiles/validation/';
   MessageUpdateDto? refuseDto;
   int? id;
   ApiController({this.refuseDto, this.id});
@@ -36,6 +37,11 @@ class ApiController<T> extends Request_Api {
       case LoadOtherProfilesEvent:
         //프로필 조회
         _response = await get_Request_Include_param(_profile, id!);
+        return _response;
+
+      case RegistrationPhoneNumberEvent:
+        //폰 등록 여부 조회
+        _response = await get_Request(_registrationPhoneNumber);
         return _response;
 
       case SentMessageLoadEvent:

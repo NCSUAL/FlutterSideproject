@@ -36,6 +36,9 @@ class _HomeState extends State<Home> {
         if (index == 0) {
           context.read<TimeDailyFourIntroduceBloc>().add(TimeCheckEvent());
         }
+        if (index == 1) {
+          context.read<SentMessageBloc>().add(SentMessageLoadEvent());
+        }
         _current = index;
       });
     }

@@ -125,7 +125,7 @@ class _ProfileMainState extends State<ProfileMain> {
                       onTap: () {
                         //프로필 수정 함수
                       },
-                      child: Component('프로필 수정', 31, 4.6, 16.2.sp)),
+                      child: Component(null, 0, '프로필 수정', 31, 4.6, 16.2.sp)),
                   SizedBox(height: 3.4.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 6.w),

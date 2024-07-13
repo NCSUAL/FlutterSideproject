@@ -40,7 +40,7 @@ class MessageMain extends StatelessWidget {
                       return Padding(
                         padding: index == 0
                             ? EdgeInsets.only(
-                                top: height * 0.035,
+                                top: height * 0.032,
                                 left: width * 0.058,
                                 right: width * 0.058,
                                 bottom: height * 0.01,
