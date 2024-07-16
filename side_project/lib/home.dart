@@ -3,7 +3,7 @@ import 'package:side_project/bloc/DailyFourIntroduceBloc.dart';
 import 'package:side_project/bloc/ReceivedMessageBloc.dart';
 import 'package:side_project/bloc/SentMessageBloc.dart';
 import 'package:side_project/bloc/TimeDailyFourIntroduceBloc.dart';
-import 'package:side_project/controller/BottomNavigationBarCubit.dart';
+import 'package:side_project/cubit/BottomNavigationBarCubit.dart';
 import 'package:side_project/view/home/HomeMain.dart';
 import 'package:side_project/view/likeable/LikeAbleMain.dart';
 import 'package:side_project/view/message/MessageMain.dart';
