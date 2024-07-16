@@ -6,6 +6,7 @@ import 'package:side_project/bloc/OtherProfilesBloc.dart';
 import 'package:side_project/bloc/ReceivedMessageBloc.dart';
 import 'package:side_project/bloc/SentMessageBloc.dart';
 import 'package:side_project/bloc/TimeDailyFourIntroduceBloc.dart';
+import 'package:side_project/controller/BottomNavigationBarCubit.dart';
 import 'package:side_project/login/bloc/SplashBloc.dart';
 import 'package:side_project/login/splash/Splash.dart';
 import 'package:side_project/test/design.dart';
@@ -42,7 +43,8 @@ void main() async {
         home: BlocBuilder<SplashBloc, SplashState>(builder: (context, state) {
           print(state);
           if (state is LoadedBlocState) {
-            return Home();
+            return BlocProvider(
+                create: (context) => BottomNavigationBarCubit(), child: Home());
           } else {
             return Splash();
           }
