@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:side_project/reponsive_layout/Responsive_Function.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:get/get.dart' as getx;
+import 'package:side_project/view/message/registrationPhoneNumber/RegistrationPhoneNumberPage2.dart';
 
 class RegistrationPhoneNumberPage1 extends StatefulWidget {
   const RegistrationPhoneNumberPage1({super.key});
@@ -50,7 +52,7 @@ class _RegistrationPhoneNumberPage1State
               child: Column(
                 children: [
                   SizedBox(
-                    height: 3.6.h,
+                    height: 3.9.h,
                   ),
                   Center(
                     child: Text(
@@ -66,7 +68,7 @@ class _RegistrationPhoneNumberPage1State
                     ),
                   ),
                   SizedBox(
-                    height: 5.5.h,
+                    height: 5.6.h,
                   ),
                   TextField(
                     onTapOutside: (event) =>
@@ -80,7 +82,7 @@ class _RegistrationPhoneNumberPage1State
                         color: Colors.black,
                         height: 1),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 2.4.h),
+                      contentPadding: EdgeInsets.symmetric(vertical: 2.5.h),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -115,7 +117,10 @@ class _RegistrationPhoneNumberPage1State
                     height: 3.9.h,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      getx.Get.to(() => RegistrationPhoneNumberPage2(),
+                          transition: getx.Transition.noTransition);
+                    },
                     child: Container(
                       width: double.infinity,
                       height: 7.h,

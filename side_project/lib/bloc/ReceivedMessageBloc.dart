@@ -30,6 +30,7 @@ class ReceivedMessageBloc
           emit(ErrorMessageState());
         }
       } catch (e) {
+        print(e);
         emit(ErrorMessageState());
       }
     });

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/bloc/MyProfilesBloc.dart';
+import 'package:side_project/bloc/OtherProfilesBloc.dart';
 import 'package:side_project/bloc/ReceivedMessageBloc.dart';
 import 'package:side_project/dto/MessageUpdateDto.dart';
 import 'package:side_project/model/MessageModel.dart';
@@ -64,6 +65,10 @@ class MessageProfile extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // 상세 프로필 보기 이벤트
+                            context.read<OtherProfilesBloc>().add(
+                                LoadOtherProfilesEvent(
+                                    id: data.contacts![0].id));
+                            getx.Get.toNamed('/DetailsProfile');
                           },
                           child: Text(
                             '상세 프로필 보기 >',

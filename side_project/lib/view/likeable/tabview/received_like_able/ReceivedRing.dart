@@ -40,8 +40,8 @@ class ReceivedRing extends StatelessWidget {
                       onTap: () {
                         context.read<OtherProfilesBloc>().add(
                             LoadOtherProfilesEvent(
-                                id: state.ring_receive[firstIndex].contacts![0]
-                                    ['id']));
+                                id: state
+                                    .ring_receive[firstIndex].contacts![0].id));
                         Get.toNamed("DetailsProfile");
                       },
                       child: likeAbleComponent2(
@@ -55,7 +55,7 @@ class ReceivedRing extends StatelessWidget {
                           context.read<OtherProfilesBloc>().add(
                               LoadOtherProfilesEvent(
                                   id: state.ring_receive[secondIndex]
-                                      .contacts![0]['id']));
+                                      .contacts![0].id));
                           Get.toNamed("DetailsProfile");
                         },
                         child: likeAbleComponent2(

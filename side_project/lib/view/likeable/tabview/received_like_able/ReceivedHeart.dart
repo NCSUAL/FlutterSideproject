@@ -44,7 +44,7 @@ class ReceivedHeart extends StatelessWidget {
                         context.read<OtherProfilesBloc>().add(
                             LoadOtherProfilesEvent(
                                 id: state.heart_receive[firstIndex].contacts![0]
-                                    ['id']));
+                                    .id));
                         Get.toNamed("DetailsProfile");
                       },
                       child: likeAbleComponent2(
@@ -58,7 +58,7 @@ class ReceivedHeart extends StatelessWidget {
                           context.read<OtherProfilesBloc>().add(
                               LoadOtherProfilesEvent(
                                   id: state.heart_receive[secondIndex]
-                                      .contacts![0]['id']));
+                                      .contacts![0].id));
                           Get.toNamed("DetailsProfile");
                         },
                         child: likeAbleComponent2(

@@ -72,7 +72,7 @@ class PriviousAppbar extends StatelessWidget {
         children: [
           GestureDetector(
             child: Container(
-              width: 2.8.w,
+              width: 2.7.w,
               child: Image_Res('privious', 1),
             ),
             onTap: () {
