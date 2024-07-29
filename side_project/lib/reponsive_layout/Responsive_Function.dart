@@ -185,3 +185,73 @@ Widget likeAbleComponent2(String url, String text, String subtitle) {
     ],
   );
 }
+
+//연락처 등록 폼
+Widget form(String text, int index, List<TextEditingController> _controller) {
+  return Container(
+    width: double.infinity,
+    child: Row(
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+            color: Color(0xFF41474C),
+            fontSize: 17.sp,
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w500,
+            height: 0,
+          ),
+        ),
+        SizedBox(
+          width: 4.w,
+        ),
+        Expanded(
+          child: TextField(
+            onTapOutside: (event) =>
+                FocusManager.instance.primaryFocus?.unfocus(),
+            cursorColor: Colors.black,
+            controller: _controller[index],
+            textAlign: TextAlign.start,
+            style: TextStyle(
+                fontFamily: 'Pretendard',
+                fontSize: 17.3.sp,
+                color: Colors.black,
+                height: 1),
+            decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.34.h),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Color(0xFF41474C),
+                  width: 1,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Color(0xFFC5C8CE),
+                  width: 1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Color(0xFFC5C8CE),
+                  width: 1,
+                ),
+              ),
+              hintText: 'abc1234',
+              fillColor: Color(0xFFFDFDFD),
+              hintStyle: TextStyle(
+                fontFamily: 'Pretendard',
+                fontSize: 17.3.sp,
+                color: Color(0xFF999FA4),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}

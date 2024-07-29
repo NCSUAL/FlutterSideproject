@@ -33,7 +33,6 @@ class _RegistrationPhoneNumberPage1State
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(5.h),
@@ -118,8 +117,10 @@ class _RegistrationPhoneNumberPage1State
                   ),
                   GestureDetector(
                     onTap: () {
-                      getx.Get.to(() => RegistrationPhoneNumberPage2(),
-                          transition: getx.Transition.noTransition);
+                      if (_isinpt) {
+                        getx.Get.to(() => RegistrationPhoneNumberPage2(),
+                            transition: getx.Transition.noTransition);
+                      }
                     },
                     child: Container(
                       width: double.infinity,

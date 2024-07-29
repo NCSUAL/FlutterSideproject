@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/bloc/ReceivedMessageBloc.dart';
+import 'package:side_project/cubit/MessageProfileCubit.dart';
 import 'package:side_project/view/loading/Loading.dart';
 import 'package:side_project/view/message/MessageEmpty.dart';
 import 'package:side_project/view/message/Received_Message.dart';
@@ -56,8 +57,11 @@ class MessageMain extends StatelessWidget {
                                 data: state.receive_message[index]),
                           ),
                           onTap: () {
-                            getx.Get.toNamed('/MessageProfile',
-                                arguments: state.receive_message[index]);
+                            context
+                                .read<MessageProfileCubit>()
+                                .updateState(state.receive_message[index]);
+                            print(1);
+                            getx.Get.toNamed('/MessageProfile');
                           },
                         ),
                       );

@@ -25,17 +25,6 @@ class Home extends StatelessWidget {
       ProfileMain()
     ];
 
-    void _onTap(int index) {
-      //페이지 변경
-      context.read<BottomNavigationBarCubit>().setPage(index);
-      if (index == 0) {
-        context.read<TimeDailyFourIntroduceBloc>().add(TimeCheckEvent());
-      }
-      if (index == 1) {
-        context.read<SentMessageBloc>().add(SentMessageLoadEvent());
-      }
-    }
-
     return Scaffold(
       body:
           BlocBuilder<BottomNavigationBarCubit, int>(builder: (context, state) {
@@ -79,7 +68,11 @@ class Home extends StatelessWidget {
                       fontSize: _fontsize.sp,
                       fontWeight: FontWeight.w500),
                   type: BottomNavigationBarType.fixed,
-                  onTap: _onTap,
+                  onTap: (value) {
+                    context
+                        .read<BottomNavigationBarCubit>()
+                        .setPage(context, value);
+                  },
                   currentIndex: state,
                   backgroundColor: Colors.white,
                   items: [

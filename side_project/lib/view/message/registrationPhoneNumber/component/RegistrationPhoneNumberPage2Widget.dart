@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart' as getx;
 import 'package:side_project/view/message/registrationPhoneNumber/RegistrationPhoneNumberPage3.dart';
+import 'package:side_project/reponsive_layout/Responsive_Function.dart';
 
 class RegistrationPhoneNumberPage2Widget extends StatefulWidget {
   const RegistrationPhoneNumberPage2Widget({super.key});
@@ -40,96 +41,29 @@ class _RegistrationPhoneNumberPage2WidgetState
     return true;
   }
 
-  Widget form(String text, int index) {
-    return Container(
-      width: double.infinity,
-      child: Row(
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-              color: Color(0xFF41474C),
-              fontSize: 17.sp,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.w500,
-              height: 0,
-            ),
-          ),
-          SizedBox(
-            width: 4.w,
-          ),
-          Expanded(
-            child: TextField(
-              onTapOutside: (event) =>
-                  FocusManager.instance.primaryFocus?.unfocus(),
-              cursorColor: Colors.black,
-              controller: _controller[index],
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                  fontFamily: 'Pretendard',
-                  fontSize: 17.3.sp,
-                  color: Colors.black,
-                  height: 1),
-              decoration: InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.34.h),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                    color: Color(0xFF41474C),
-                    width: 1,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                    color: Color(0xFFC5C8CE),
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                    color: Color(0xFFC5C8CE),
-                    width: 1,
-                  ),
-                ),
-                hintText: 'abc1234',
-                fillColor: Color(0xFFFDFDFD),
-                hintStyle: TextStyle(
-                  fontFamily: 'Pretendard',
-                  fontSize: 17.3.sp,
-                  color: Color(0xFF999FA4),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        form('전화번호', 0),
+        form('전화번호', 0, _controller),
         SizedBox(
           height: 2.7.h,
         ),
-        form('카카오톡', 1),
+        form('카카오톡', 1, _controller),
         SizedBox(
           height: 2.7.h,
         ),
-        form('인스타ID', 2),
+        form('인스타ID', 2, _controller),
         SizedBox(
           height: 7.5.h,
         ),
         GestureDetector(
           onTap: () {
-            getx.Get.to(() => RegistrationPhoneNumberPage3(),
-                transition: getx.Transition.noTransition);
+            if (check()) {
+              getx.Get.to(() => RegistrationPhoneNumberPage3(),
+                  transition: getx.Transition.noTransition);
+            }
           },
           child: Container(
             width: double.infinity,

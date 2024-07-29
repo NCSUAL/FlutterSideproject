@@ -7,6 +7,7 @@ import 'package:side_project/bloc/ReceivedMessageBloc.dart';
 import 'package:side_project/bloc/SentMessageBloc.dart';
 import 'package:side_project/bloc/TimeDailyFourIntroduceBloc.dart';
 import 'package:side_project/cubit/BottomNavigationBarCubit.dart';
+import 'package:side_project/cubit/MessageProfileCubit.dart';
 import 'package:side_project/login/bloc/SplashBloc.dart';
 import 'package:side_project/login/splash/Splash.dart';
 import 'package:side_project/test/design.dart';
@@ -30,6 +31,7 @@ void main() async {
         BlocProvider(create: (context) => SentMessageBloc()),
         BlocProvider(create: (context) => OtherProfilesBloc()),
         BlocProvider(create: (context) => TimeDailyFourIntroduceBloc()),
+        BlocProvider(create: (context) => MessageProfileCubit()),
         BlocProvider(
             lazy: false,
             create: (context) => SplashBloc(
