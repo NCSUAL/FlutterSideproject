@@ -25,20 +25,15 @@ void main() async {
   runApp(ResponsiveSizer(builder: (context, orientation, screenType) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => DailyFourIntroduceBloc()),
-        BlocProvider(create: (context) => MyProfilesBloc()),
-        BlocProvider(create: (context) => ReceivedMessageBloc()),
-        BlocProvider(create: (context) => SentMessageBloc()),
+        BlocProvider(lazy: false, create: (context) => MyProfilesBloc()),
+        BlocProvider(lazy: false, create: (context) => ReceivedMessageBloc()),
+        BlocProvider(lazy: false, create: (context) => SentMessageBloc()),
+        BlocProvider(
+            lazy: false, create: (context) => DailyFourIntroduceBloc()),
         BlocProvider(create: (context) => OtherProfilesBloc()),
         BlocProvider(create: (context) => TimeDailyFourIntroduceBloc()),
         BlocProvider(create: (context) => MessageProfileCubit()),
-        BlocProvider(
-            lazy: false,
-            create: (context) => SplashBloc(
-                context.read<MyProfilesBloc>(),
-                context.read<DailyFourIntroduceBloc>(),
-                context.read<ReceivedMessageBloc>(),
-                context.read<SentMessageBloc>())),
+        BlocProvider(create: (context) => SplashBloc()),
       ],
       //main
       child: getx.GetMaterialApp(
