@@ -11,7 +11,9 @@ class MyProfilesBloc extends Bloc<MyProfileEvent, MyProfileState> {
       emit(LoadingMyProfileState());
       try {
         final data = await apiController.apiCategorize();
-
+        emit(LoadedMyProfileState(
+            data: ProfileModel.fromJson(data.data), phone_number: false));
+        /**
         //폰 등록 여부
         apiController = new ApiController<RegistrationPhoneNumberEvent>();
 
@@ -26,8 +28,15 @@ class MyProfilesBloc extends Bloc<MyProfileEvent, MyProfileState> {
       } catch (e) {
         print(e);
         emit(ErrorMyProfileState());
+            */
+      } catch (e) {
+        print(e);
+        throw Exception("api 요청 오류");
       }
     });
+
+    //블럭 주입시 이벤트 실행
+    add(LoadMyProfileEvent());
   }
 }
 

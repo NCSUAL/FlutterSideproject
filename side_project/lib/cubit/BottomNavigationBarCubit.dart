@@ -12,9 +12,6 @@ class BottomNavigationBarCubit extends Cubit<int> {
     if (index == 0) {
       context.read<TimeDailyFourIntroduceBloc>().add(TimeCheckEvent());
     }
-    if (index == 1) {
-      context.read<SentMessageBloc>().add(SentMessageLoadEvent());
-    }
     emit(index);
   }
 }

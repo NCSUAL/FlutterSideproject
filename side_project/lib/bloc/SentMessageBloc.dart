@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:side_project/controller/ApiController.dart';
+import 'package:side_project/dto/MessageSentDto.dart';
 import 'package:side_project/model/MessageModel.dart';
 /**
  *  이 클래스를 만드는 이유
@@ -20,17 +21,26 @@ class SentMessageBloc extends Bloc<SentMessageEvent, SentMessageState> {
 
       try {
         final data = await apiController.apiCategorize();
-        if (data != null) {
-          final _mappingMessageModel = MappingMessageModel.fromJson(data.data);
-          emit(LoadedSentMessageState(
-              sent_message: _mappingMessageModel.alldatas,
-              ring_receive: _mappingMessageModel.ringdatas,
-              heart_receive: _mappingMessageModel.heartdatas));
-        } else {
-          emit(ErrorMessageState());
-        }
+        final _mappingMessageModel = MappingMessageModel.fromJson(data.data);
+        emit(LoadedSentMessageState(
+            sent_message: _mappingMessageModel.alldatas,
+            ring_receive: _mappingMessageModel.ringdatas,
+            heart_receive: _mappingMessageModel.heartdatas));
       } catch (e) {
         emit(ErrorMessageState());
+      }
+    });
+    //블럭 주입시 이벤트 실행
+    add(SentMessageLoadEvent());
+
+    on<SentEvent>((event, emit) {
+      try {
+        apiController =
+            new ApiController<SentEvent>(messageSentDto: event.sentDto);
+        apiController.apiCategorize();
+      } catch (e) {
+        print(e);
+        throw Exception("api 요청 오류");
       }
     });
   }
@@ -40,6 +50,17 @@ class SentMessageBloc extends Bloc<SentMessageEvent, SentMessageState> {
 abstract class SentMessageEvent extends Equatable {}
 
 class SentMessageLoadEvent extends SentMessageEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
+
+//메세지 보내기
+class SentEvent extends SentMessageEvent {
+  //DI
+  final MessageSentDto sentDto;
+  SentEvent({required this.sentDto});
+
   @override
   // TODO: implement props
   List<Object?> get props => [];

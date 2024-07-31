@@ -5,9 +5,8 @@ import 'package:side_project/model/FourIntroduceModel.dart';
 
 class DailyFourIntroduceBloc
     extends Bloc<DailyFourIntroduceEvent, DailyFourIntroduceState> {
+  late ApiController apiController;
   DailyFourIntroduceBloc() : super(InitialDailyFourIntroduceState()) {
-    late ApiController apiController;
-
     //데이터 로드
     on<LoadDailyFourIntroduceEvent>(
       (event, emit) async {
@@ -22,6 +21,8 @@ class DailyFourIntroduceBloc
         }
       },
     );
+
+    add(LoadDailyFourIntroduceEvent());
   }
 }
 
