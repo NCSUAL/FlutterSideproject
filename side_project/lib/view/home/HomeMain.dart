@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/reponsive_layout/Responsive_Function.dart';
 import 'package:side_project/view/home/DailyFourIntroduce.dart';
+import 'package:get/get.dart' as getx;
+import 'package:side_project/view/home/HowToUseApp.dart';
 
 class HomeMain extends StatefulWidget {
   const HomeMain({super.key});
@@ -36,7 +39,16 @@ class _HomeMainState extends State<HomeMain> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //이용 방법 버튼
-                    InkWell(
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          barrierColor: Colors.black54,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return HowToUseApp();
+                          },
+                        );
+                      },
                       child: Row(
                         children: [
                           SizedBox(width: 7.2.w, child: Image_Res("point", 1)),
