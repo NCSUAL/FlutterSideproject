@@ -8,6 +8,7 @@ class RegistrationPhoneNumberPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController _scrollController = ScrollController();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -18,9 +19,11 @@ class RegistrationPhoneNumberPage2 extends StatelessWidget {
             child: PriviousAppbar(),
           ),
         ),
-        body: SingleChildScrollView(
-          child: ScrollConfiguration(
-            behavior: const ScrollBehavior().copyWith(overscroll: false),
+        body: ScrollConfiguration(
+          behavior: const ScrollBehavior().copyWith(overscroll: false),
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            physics: ClampingScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.8.w),
               child: Column(

@@ -207,8 +207,6 @@ Widget form(String text, int index, List<TextEditingController> _controller) {
         ),
         Expanded(
           child: TextField(
-            onTapOutside: (event) =>
-                FocusManager.instance.primaryFocus?.unfocus(),
             cursorColor: Colors.black,
             controller: _controller[index],
             textAlign: TextAlign.start,

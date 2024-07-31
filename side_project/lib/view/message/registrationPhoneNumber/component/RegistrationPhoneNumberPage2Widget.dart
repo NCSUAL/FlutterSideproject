@@ -61,7 +61,7 @@ class _RegistrationPhoneNumberPage2WidgetState
         GestureDetector(
           onTap: () {
             if (check()) {
-              getx.Get.to(() => RegistrationPhoneNumberPage3(),
+              getx.Get.off(() => RegistrationPhoneNumberPage3(),
                   transition: getx.Transition.noTransition);
             }
           },

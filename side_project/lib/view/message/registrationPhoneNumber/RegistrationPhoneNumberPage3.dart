@@ -38,7 +38,7 @@ class RegistrationPhoneNumberPage3 extends StatelessWidget {
                   BlocBuilder<MessageProfileCubit, MessageProfileState>(
                       builder: (context, state) {
                     return Text(
-                      '${state.messageModel.sender_name}님에게\n메세지를 보낼까요?',
+                      '${(state.messageModel == null) ? state.profileModel!.nickname : state.messageModel!.sender_name}님에게\n메세지를 보낼까요?',
                       style: TextStyle(
                         color: Color(0xFF171B1C),
                         fontSize: 20.3.sp,

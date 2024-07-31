@@ -50,7 +50,7 @@ class SentHeart extends StatelessWidget {
                       },
                       child: likeAbleComponent2(
                           ImageTest.image,
-                          state.heart_receive[firstIndex].sender_name!,
+                          state.heart_receive[firstIndex].receiver_name!,
                           '1000시간 전'),
                     ),
                     if (secondIndex < state.heart_receive.length)
@@ -64,7 +64,7 @@ class SentHeart extends StatelessWidget {
                         },
                         child: likeAbleComponent2(
                             ImageTest.image,
-                            state.heart_receive[secondIndex].sender_name!,
+                            state.heart_receive[secondIndex].receiver_name!,
                             '1000시간 전'),
                       ),
                   ],

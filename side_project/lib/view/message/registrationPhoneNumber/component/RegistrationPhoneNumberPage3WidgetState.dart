@@ -2,8 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart' as getx;
+import 'package:side_project/bloc/MyProfilesBloc.dart';
+import 'package:side_project/bloc/SentMessageBloc.dart';
+import 'package:side_project/cubit/MessageProfileCubit.dart';
 import 'package:side_project/view/message/registrationPhoneNumber/RegistrationPhoneNumberPage3.dart';
 import 'package:side_project/reponsive_layout/Responsive_Function.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:side_project/dto/MessageSentDto.dart';
 
 class RegistrationPhoneNumberPage3Widget extends StatefulWidget {
   const RegistrationPhoneNumberPage3Widget({super.key});
@@ -58,8 +63,6 @@ class _RegistrationPhoneNumberPage3WidgetState
             controller: _controller[3],
             textAlign: TextAlign.start,
             maxLength: 500,
-            onTapOutside: (event) =>
-                FocusManager.instance.primaryFocus?.unfocus(),
             maxLines: null,
             expands: true,
             decoration: InputDecoration(
@@ -119,8 +122,33 @@ class _RegistrationPhoneNumberPage3WidgetState
         ),
         GestureDetector(
           onTap: () {
-            getx.Get.to(() => RegistrationPhoneNumberPage3(),
-                transition: getx.Transition.noTransition);
+            //내용,연락처 전부 충족
+            if (check()) {
+              final int _id;
+              //유효성 검증
+              if (context.read<MessageProfileCubit>().state.messageModel ==
+                  null) {
+                _id =
+                    context.read<MessageProfileCubit>().state.profileModel!.id;
+              } else {
+                _id = context
+                    .read<MessageProfileCubit>()
+                    .state
+                    .messageModel!
+                    .contacts![0]
+                    .id;
+              }
+
+              print(_id);
+              final MessageSentDto messageSentDto = new MessageSentDto(
+                  sender_id: context.read<MyProfilesBloc>().state.data!.id,
+                  content: _controller[0].text,
+                  message_type_id: 1, //메세지 타입
+                  receiver_id: _id);
+              context
+                  .read<SentMessageBloc>()
+                  .add(SentEvent(sentDto: messageSentDto));
+            }
           },
           child: Container(
             width: double.infinity,

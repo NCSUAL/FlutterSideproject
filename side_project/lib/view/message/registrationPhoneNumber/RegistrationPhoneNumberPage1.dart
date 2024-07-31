@@ -118,7 +118,7 @@ class _RegistrationPhoneNumberPage1State
                   GestureDetector(
                     onTap: () {
                       if (_isinpt) {
-                        getx.Get.to(() => RegistrationPhoneNumberPage2(),
+                        getx.Get.off(() => RegistrationPhoneNumberPage2(),
                             transition: getx.Transition.noTransition);
                       }
                     },

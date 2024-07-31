@@ -47,7 +47,7 @@ class SentRing extends StatelessWidget {
                       },
                       child: likeAbleComponent2(
                           ImageTest.image,
-                          state.ring_receive[firstIndex].sender_name!,
+                          state.ring_receive[firstIndex].receiver_name!,
                           '1000시간 전'),
                     ),
                     if (secondIndex < state.ring_receive.length)
@@ -61,7 +61,7 @@ class SentRing extends StatelessWidget {
                         },
                         child: likeAbleComponent2(
                             ImageTest.image,
-                            state.ring_receive[secondIndex].sender_name!,
+                            state.ring_receive[secondIndex].receiver_name!,
                             '1000시간 전'),
                       ),
                   ],

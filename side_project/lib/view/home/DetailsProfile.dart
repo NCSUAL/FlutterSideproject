@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/bloc/OtherProfilesBloc.dart';
+import 'package:side_project/cubit/MessageProfileCubit.dart';
 import 'package:side_project/reponsive_layout/Responsive_Function.dart';
 import 'package:side_project/test/Image.dart';
 import 'package:side_project/view/home/ProfileAppbar/ProfileAppbar.dart';
-import 'package:side_project/view/home/designcomponent/DesignComponent1.dart';
+import 'package:side_project/view/home/designcomponent/DesignComponent_DetailsProfile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:side_project/view/loading/Loading.dart';
+import 'package:get/get.dart' as getx;
+import 'package:side_project/view/message/MessageProfile.dart';
+import 'package:side_project/view/message/registrationPhoneNumber/RegistrationPhoneNumberPage1.dart';
 
 class DetailsProfile extends StatelessWidget {
   const DetailsProfile({super.key});
@@ -188,7 +192,7 @@ class DetailsProfile extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 1.8.h),
-                            DesignComponent1(
+                            DesignComponent_DetailsProfile(
                               data: state.data!,
                             ),
                             SizedBox(
@@ -268,27 +272,37 @@ class DetailsProfile extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(
-                                child: Image_Res('chat_change', 1),
-                                width: 8.w,
-                              ),
-                              SizedBox(
-                                height: 0.3.h,
-                              ),
-                              Text(
-                                '메세지',
-                                style: TextStyle(
-                                  color: Color(0xFF00C57D),
-                                  fontSize: 14.5.sp,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0,
+                          GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<MessageProfileCubit>()
+                                  .updateState_Pr(state!.data!);
+                              //내 연락처 등록하기
+                              getx.Get.to(() => RegistrationPhoneNumberPage1(),
+                                  transition: getx.Transition.noTransition);
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                  child: Image_Res('chat_change', 1),
+                                  width: 8.w,
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 0.3.h,
+                                ),
+                                Text(
+                                  '메세지',
+                                  style: TextStyle(
+                                    color: Color(0xFF00C57D),
+                                    fontSize: 14.5.sp,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

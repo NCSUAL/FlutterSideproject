@@ -5,6 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/bloc/MyProfilesBloc.dart';
 import 'package:side_project/reponsive_layout/Responsive_Function.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:side_project/test/Image.dart';
 import 'package:side_project/view/loading/Loading.dart';
 
 class ProfileMain extends StatefulWidget {
@@ -105,8 +106,8 @@ class _ProfileMainState extends State<ProfileMain> {
                   //공간
                   CircleAvatar(
                     radius: 7.4.h,
-                    backgroundImage: NetworkImage(currentState
-                        .data!.images[0].image), // 이미지 URL을 자신의 것으로 변경
+                    backgroundImage:
+                        NetworkImage(ImageTest.image), // 이미지 URL을 자신의 것으로 변경
                   ),
                   SizedBox(height: 2.3.h),
                   Text(

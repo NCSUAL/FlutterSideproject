@@ -26,9 +26,9 @@ class _Sent_Like_AbleState extends State<Sent_Like_Able> {
       body: ScrollConfiguration(
         behavior: const ScrollBehavior()
             .copyWith(overscroll: false), // 담김 효과 제거 overscroll
-        child: BlocBuilder<ReceivedMessageBloc, ReceivedMessageState>(
+        child: BlocBuilder<SentMessageBloc, SentMessageState>(
             builder: (context, state) {
-          if (state is LoadedReceivedMessageState) {
+          if (state is LoadedSentMessageState) {
             return ListView(
               children: [
                 SizedBox(
