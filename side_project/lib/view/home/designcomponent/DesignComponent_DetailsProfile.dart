@@ -3,9 +3,9 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_project/model/ProfileModel.dart';
 import 'package:side_project/reponsive_layout/Responsive_Function.dart';
 
-class DesignComponent1 extends StatelessWidget {
+class DesignComponent_DetailsProfile extends StatelessWidget {
   final ProfileModel data;
-  const DesignComponent1({super.key, required this.data});
+  const DesignComponent_DetailsProfile({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
