@@ -5,6 +5,7 @@ import 'package:side_project/bloc/DailyFourIntroduceBloc.dart';
 import 'package:side_project/bloc/OtherProfilesBloc.dart';
 import 'package:side_project/bloc/ReceivedMessageBloc.dart';
 import 'package:dio/dio.dart';
+import 'package:side_project/dto/MessageSentDto.dart';
 import 'package:side_project/dto/MessageUpdateDto.dart';
 import 'package:side_project/bloc/MyProfilesBloc.dart';
 import 'package:side_project/bloc/SentMessageBloc.dart';
@@ -18,9 +19,11 @@ class ApiController<T> extends Request_Api {
   static const String _profile = 'profiles/';
   static const String _myprofile = 'profiles/my/';
   static const String _registrationPhoneNumber = 'profiles/validation/';
+  static const String _sentMessageOther = 'message/';
+  MessageSentDto? messageSentDto;
   MessageUpdateDto? refuseDto;
   int? id;
-  ApiController({this.refuseDto, this.id});
+  ApiController({this.refuseDto, this.id, this.messageSentDto});
 
   Future<Response> apiCategorize() async {
     switch (T) {
@@ -63,6 +66,11 @@ class ApiController<T> extends Request_Api {
         _response = await get_Request(_todayProfiles);
         return _response;
 
+      case SentEvent:
+        //메세지 보내기
+        _response =
+            await post_Request(_sentMessageOther, messageSentDto as Object);
+        return _response;
       default:
         throw Exception("예기치 못한 오류");
     }
